@@ -28,7 +28,7 @@ Mirantis platform will be installed using two Ubuntu based EC2 VMs running on AW
 - HTTPie and Curl.
 
 
-### Mirantis Container Runtime installation
+## Mirantis Container Runtime installation
 
 1. Prepare the environment
 
@@ -162,7 +162,7 @@ After choosing the "Local - Manage the local Docker environment", we'll see its 
 
 
 
-### Mirantis Kubernetes Engine Installation
+## Mirantis Kubernetes Engine Installation
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mke.html
 
 1. MKE installation
@@ -302,7 +302,7 @@ Upload the trial license to go to the landing page:
 ![MKE_LandingPage](artifacts/MKE2.png "MKE landing page")
 
 
-### Mirantis Secure Registry (MSR)
+## Mirantis Secure Registry (MSR)
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/msr.html
 
 Create another EC2 instance to install MSR. Kong Enterprise images copied from Bintray repositories will be stored here.
@@ -580,7 +580,7 @@ Go to MSR using its EC2's Public IP. Accept the Digital Certificate presented by
 ![MSR](artifacts/MSR.png "MSR")
 
 
-### Kong Enterprise Docker Images
+## Kong Enterprise Docker Images
 
 1. Register MSR as an insecure-registry<p>
 For lab purposes, let's register MSR as an insecure register. Using Docker Desktop 3.1.0 on a MacOS, click on Docker->Preferences
@@ -656,7 +656,7 @@ docker image rm 34.222.221.3/admin/postgres:latest
 </pre>
 
 
-### Kong Enterprise installation - CLI
+## Kong Enterprise installation - CLI
 Still on MacOS run:
 
 Check your local images
@@ -768,7 +768,7 @@ http :8001 | jq .version
 
 
 
-### Kong Enterprise installation - Docker Compose
+## Kong Enterprise installation - Docker Compose
 1. Create Kong Enterprise Docker Compose file
 Below is an example of a docker-compose.yml file. Notice the KONG_PORTAL_GUI_HOST configuration is pointing to the MKE's public address, 34.220.139.185
 
@@ -866,7 +866,7 @@ If you want to delete the Stack click on the right menu:
 
 
 
-### Kong Enterprise Service, Route and Plugins
+## Kong Enterprise Service, Route and Plugins
 1. Create a Service
 Go to Kong Manager and click on "Workspace" default. Click on "Services"
 ![Kong_Service](artifacts/Kong_Service.png "Kong_Service")
@@ -997,43 +997,56 @@ X-RateLimit-Remaining-Minute: 0
 </pre>
 
 
-### Kong for Kubernetes Ingress Controller
+## Kong for Kubernetes Ingress Controller
 We are going to install and test Kong for Kubernetes (K4K8S) from MKE host.
 
-Install kubectl on MKE host
+1. Install kubectl on MKE host:
+<pre>
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 
 chmod +x ./kubectl
 
 ./kubectl version
+</pre>
 
-
-Install Helm on MKE host
+2. Install Helm on MKE host
+<pre>
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 
 $ chmod 700 get_helm.sh
 $ ./get_helm.sh
 helm version
+</pre>
 
-Download MKE Client Bundle
+3. Download MKE Client Bundle
+<pre>
 mkdir mirantis
 cd mirantis
+</pre>
 
-# Create an environment variable with the user security token
+Create an environment variable with the user security token
+<pre>
 AUTHTOKEN=$(curl -sk -d '{"username":"admin","password":"kubernetes"}' https://34.220.139.185/auth/login | jq -r .auth_token)
+</pre>
 
-# Download the client certificate bundle
+Download the client certificate bundle
+<pre>
 curl -k -H "Authorization: Bearer $AUTHTOKEN" https://34.220.139.185/api/clientbundle -o bundle.zip
+</pre>
 
-# Unzip the bundle.
+Unzip the bundle.
+<pre>
 unzip bundle.zip
+</pre>
 
-# Run the utility script.
+Run the utility script.
+<pre>
 eval "$(<env.sh)"
+</pre>
 
-
-Testing the connection
+4. Testing the connection
 Test if you can connect to Kubernetes Cluster using:
+</pre>
 $ kubectl config get-contexts
 CURRENT   NAME                            CLUSTER                         AUTHINFO                        NAMESPACE
 *         ucp_34.220.139.185:6443_admin   ucp_34.220.139.185:6443_admin   ucp_34.220.139.185:6443_admin   
@@ -1051,7 +1064,7 @@ kube-system   coredns-665c6f959f-sr56w                   1/1     Running   0    
 kube-system   ucp-metrics-f2vz6                          3/3     Running   1          3h29m
 kube-system   ucp-nvidia-device-plugin-cwrpg             1/1     Running   0          3h29m
 kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0          118m
-
+</pre>
 
 Install Kong for Kubernetes
 $ helm repo add kong https://charts.konghq.com
