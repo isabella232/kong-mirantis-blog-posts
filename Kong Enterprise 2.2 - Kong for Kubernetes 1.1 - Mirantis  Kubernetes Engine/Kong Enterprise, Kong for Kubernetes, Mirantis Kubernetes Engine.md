@@ -934,9 +934,10 @@ Click on "Create"
 ![Kong_Plugin3](artifacts/Plugins3.png "Kong_Plugin3")
 
 
-Consume the Route again
+6. Consume the Route again
 Notice that, this time, we get specific Rate Limiting headers.
 
+<pre>
 $ http :8000/httpbin/get
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
@@ -970,10 +971,11 @@ X-RateLimit-Remaining-Minute: 2
     "origin": "10.0.0.2, 34.220.139.185",
     "url": "http://localhost/get"
 }
-
+</pre>
 
 If we keep sending requests to the Gateway we're going to get a 429 error code:
 
+<pre>
 $ http :8000/httpbin/get
 HTTP/1.1 429 Too Many Requests
 Connection: keep-alive
@@ -992,8 +994,10 @@ X-RateLimit-Remaining-Minute: 0
 {
     "message": "API rate limit exceeded"
 }
+</pre>
 
-Kong for Kubernetes Ingress Controller
+
+### Kong for Kubernetes Ingress Controller
 We are going to install and test Kong for Kubernetes (K4K8S) from MKE host.
 
 Install kubectl on MKE host
