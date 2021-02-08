@@ -841,23 +841,23 @@ From MKE, on the left menu bar click on "Shared Resources" -> "Stacks" and "Crea
 For Name, type "kong". Click on "Next".
 Click on "Upload docker-compose.yml file" link and upload the docker-compose.yml described above.
 
-![Compose](artifacts/Compose.png "PostgreSQL_image")
-
+![Compose](artifacts/Compose.png "Compose")
 
 Click on "Create". Wait for deployment and click on "Done"
+![Compose2](artifacts/Compose2.png "Compose")
 
 
-Check Kong Enterprise deployment
+3. Check Kong Enterprise deployment
 Open a terminal on MKE and run:
 
+<pre
 $ http :8001 | jq .version
 "2.2.1.0-enterprise-edition"
-
-
-
+</pre>
 
 
 Redirect you browser to http://<MKE's public IP>:8002
+![Manager](artifacts/Manager.png "Manager")
 
 
 Delete Kong Enterprise deployment
