@@ -295,11 +295,11 @@ sudo docker container run --rm -it \
 2. Mirantis Kubernetes Engine Web UI
 Redirect your browser to https://34.220.139.185. Use the admin/pwd you defined during installation to login.
 
-![MKE_WebUI](artifacts/MKE.png "Integration Architecture")
-
+![MKE_WebUI](artifacts/MKE.png "MKE Web UI")
 
 Upload the trial license to go to the landing page:
 
+![MKE_LandingPage](artifacts/MKE2.png "MKE landing page")
 
 
 ### Mirantis Secure Registry (MSR)
