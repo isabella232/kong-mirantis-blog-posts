@@ -31,6 +31,7 @@ The following diagram describes the Kong for Kubernetes Ingress Controller and C
 ### Mirantis Container Runtime installation
 
 1. Prepare the environment
+
 https://docs.mirantis.com/docker-enterprise/v3.1/
 
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mcr.html
@@ -479,6 +480,7 @@ sudo docker run -it --rm docker/dtr:latest install --dtr-external-url https://34
 
 
 Output:
+<pre>
 $ sudo docker run -it --rm docker/dtr:latest install --dtr-external-url https://34.222.221.3 --ucp-node ip-172-31-13-110 --ucp-url https://34.220.139.185 --ucp-insecure-tls
 Unable to find image 'docker/dtr:latest' locally
 latest: Pulling from docker/dtr
@@ -553,12 +555,14 @@ INFO[0122] Successfully registered DTR with UCP
 INFO[0122] Installation is complete                     
 INFO[0122] Replica ID is set to: 3f14cdadc652           
 INFO[0122] You can use flag '--existing-replica-id 3f14cdadc652' when joining other replicas to your Docker Trusted Registry Cluster 
-
+</pre>
 
 If you want to uninstall it:
 
+<pre>
 sudo docker run -it --rm mirantis/dtr:lastest destroy --ucp-insecure-tls
 //sudo docker run -it --rm mirantis/dtr destroy --ucp-url https://54.188.84.2 --ucp-insecure-tls
+</pre>
 
 Go to MKE console
 
