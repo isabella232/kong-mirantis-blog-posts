@@ -1,4 +1,4 @@
-## Kong Enterprise, Kong for Kubernetes and Mirantis Kubernetes Engine
+# Kong Enterprise, Kong for Kubernetes and Mirantis Kubernetes Engine
 
 ### Table of Contents
 - [Overview](#overview)
