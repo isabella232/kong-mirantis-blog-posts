@@ -923,15 +923,15 @@ X-Kong-Upstream-Latency: 147
 
 5. Apply the Rate Limiting Plugin to the Route
 Go back to the "httpbinroute" Route page and click on "Add a Plugin".
-![Kong_Plugin](artifacts/Plugin.png "Kong_Plugin")
+![Kong_Plugin](artifacts/Plugin2.png "Kong_Plugin")
 
 
 Click on "Rate Limiting" plugin. Set the "Config.Minute" parameter with 3.
-![Kong_Plugin2](artifacts/Plugin2.png "Kong_Plugin2")
+![Kong_Plugin2](artifacts/Plugins2.png "Kong_Plugin2")
 
 
 Click on "Create"
-![Kong_Plugin3](artifacts/Plugin3.png "Kong_Plugin3")
+![Kong_Plugin3](artifacts/Plugins3.png "Kong_Plugin3")
 
 
 Consume the Route again
