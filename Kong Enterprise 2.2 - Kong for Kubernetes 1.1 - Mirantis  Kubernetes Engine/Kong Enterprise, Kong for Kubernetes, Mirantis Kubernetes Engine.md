@@ -1,15 +1,6 @@
 # Kong Enterprise, Kong for Kubernetes and Mirantis Kubernetes Engine
 
-### Table of Contents
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [Contributing](#contributing)
-- [Support](#support)
-- [License](#license)
-
-### Overview
+## Overview
 This Tech Guide will walk you through an end-to-end Kong Enterprise and Kong for Kubernetes provisioning process. The guide explores Kong Enterprise running on Mirantis Container Runtime and Kong for Kubernetes (K4K8S) running on Mirantis Kubernetes Engine.
 
 Kong Enterprise provides several services to defines APIs and policies to protect any existing upstream and microservices including API Governance, Analytics, Developer Portal, etc.
@@ -21,7 +12,7 @@ Mirantis platform will be installed using two Ubuntu based EC2 VMs running on AW
 . one VM for Mirantis Secure Registry
 
 
-### System Requirements
+## System Requirements
 
 - kubectl
 - Helm 3.x
@@ -855,7 +846,7 @@ $ http :8001 | jq .version
 "2.2.1.0-enterprise-edition"
 </pre>
 
-Redirect you browser to http://<MKE's public IP>:8002
+Redirect you browser to http://&ltMKE's public IP&gt:8002
 ![Manager](artifacts/Manager.png "Manager")
 
 
@@ -1112,12 +1103,12 @@ kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0    
 
 $ kubectl get service --all-namespaces
 NAMESPACE     NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
-default       kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP                      5h28m
-kong          kong-kong-proxy   NodePort    10.96.154.9     <none>        80:32780/TCP,443:34536/TCP   10m
-kube-system   compose-api       ClusterIP   10.96.51.39     <none>        443/TCP                      5h26m
-kube-system   kube-dns          ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP       5h27m
-kube-system   ucp-controller    ClusterIP   10.96.219.147   <none>        443/TCP,12379/TCP            5h26m
-kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TCP                      5h26m
+default       kubernetes        ClusterIP   10.96.0.1       &ltnone&gt        443/TCP                      5h28m
+kong          kong-kong-proxy   NodePort    10.96.154.9     &ltnone&gt        80:32780/TCP,443:34536/TCP   10m
+kube-system   compose-api       ClusterIP   10.96.51.39     &ltnone&gt        443/TCP                      5h26m
+kube-system   kube-dns          ClusterIP   10.96.0.10      &ltnone&gt        53/UDP,53/TCP,9153/TCP       5h27m
+kube-system   ucp-controller    ClusterIP   10.96.219.147   &ltnone&gt        443/TCP,12379/TCP            5h26m
+kube-system   ucp-metrics       ClusterIP   10.96.206.212   &ltnone&gt        443/TCP                      5h26m
 </pre>
 
 ![K4K8S](artifacts/K4K8S.png "K4K8S")
@@ -1187,13 +1178,13 @@ EOF
 
 $ kubectl get services --all-namespaces
 NAMESPACE     NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
-default       kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP                      5h37m
-default       sample            ClusterIP   10.96.134.16    <none>        5000/TCP                     5s
-kong          kong-kong-proxy   NodePort    10.96.154.9     <none>        80:32780/TCP,443:34536/TCP   20m
-kube-system   compose-api       ClusterIP   10.96.51.39     <none>        443/TCP                      5h36m
-kube-system   kube-dns          ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP       5h36m
-kube-system   ucp-controller    ClusterIP   10.96.219.147   <none>        443/TCP,12379/TCP            5h36m
-kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TCP                      5h36m
+default       kubernetes        ClusterIP   10.96.0.1       &ltnone&gt        443/TCP                      5h37m
+default       sample            ClusterIP   10.96.134.16    &ltnone&gt        5000/TCP                     5s
+kong          kong-kong-proxy   NodePort    10.96.154.9     &ltnone&gt        80:32780/TCP,443:34536/TCP   20m
+kube-system   compose-api       ClusterIP   10.96.51.39     &ltnone&gt        443/TCP                      5h36m
+kube-system   kube-dns          ClusterIP   10.96.0.10      &ltnone&gt        53/UDP,53/TCP,9153/TCP       5h36m
+kube-system   ucp-controller    ClusterIP   10.96.219.147   &ltnone&gt        443/TCP,12379/TCP            5h36m
+kube-system   ucp-metrics       ClusterIP   10.96.206.212   &ltnone&gt        443/TCP                      5h36m
 
 
 $ kubectl get pod --all-namespaces
@@ -1304,8 +1295,8 @@ rl-by-minute   rate-limiting   21s
 $ kubectl describe kongplugin rl-by-minute
 Name:         rl-by-minute
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       &ltnone&gt
+Annotations:  &ltnone&gt
 API Version:  configuration.konghq.com/v1
 Config:
   Minute:  3
@@ -1346,7 +1337,7 @@ $ kubectl describe ingress sampleroute
 Name:             sampleroute
 Namespace:        default
 Address:          172.31.13.110
-Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
+Default backend:  default-http-backend:80 (&lterror: endpoints "default-http-backend" not found&gt)
 Rules:
   Host        Path  Backends
   ----        ----  --------
@@ -1355,7 +1346,7 @@ Rules:
 Annotations:  konghq.com/plugins: rl-by-minute
               konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
-Events:       <none>
+Events:       &ltnone&gt
 </pre>
 
 
@@ -1419,7 +1410,7 @@ Now, let's add an API Key Policy to this route:
 
 1. Create the plugin
 <pre>
-cat <<EOF | kubectl apply -f -
+cat &lt&ltEOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
@@ -1440,8 +1431,8 @@ rl-by-minute   rate-limiting   141m
 $ kubectl describe kongplugins apikey
 Name:         apikey
 Namespace:    default
-Labels:       <none>
-Annotations:  <none>
+Labels:       &ltnone&gt
+Annotations:  &ltnone&lgt
 API Version:  configuration.konghq.com/v1
 Kind:         KongPlugin
 Metadata:
@@ -1463,7 +1454,7 @@ Metadata:
   Self Link:         /apis/configuration.konghq.com/v1/namespaces/default/kongplugins/apikey
   UID:               9c43d7fd-60cf-4b6d-9469-e6ef7200a800
 Plugin:              key-auth
-Events:              <none>
+Events:              &ltnone&gt
 </pre>
 
 3. Apply the plugin to the route
@@ -1476,7 +1467,7 @@ $ kubectl describe ingress sampleroute
 Name:             sampleroute
 Namespace:        default
 Address:          172.31.13.110
-Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
+Default backend:  default-http-backend:80 (&lterror: endpoints "default-http-backend" not found>)
 Rules:
   Host        Path  Backends
   ----        ----  --------
@@ -1485,7 +1476,7 @@ Rules:
 Annotations:  konghq.com/plugins: apikey, rl-by-minute
               konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
-Events:       <none>
+Events:       &ltnone&gt
 </pre>
 
 
@@ -1522,7 +1513,7 @@ $ kubectl delete secret consumerapikey
 
 6. Creating a Consumer with the Key
 <pre>
-cat <<EOF | kubectl apply -f -
+cat &lt&ltEOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongConsumer
 metadata:
@@ -1545,7 +1536,7 @@ consumer1   consumer1   2m37s
 $ kubectl describe kongconsumer consumer1
 Name:         consumer1
 Namespace:    default
-Labels:       <none>
+Labels:       &ltnone&gt
 Annotations:  kubernetes.io/ingress.class: kong
 API Version:  configuration.konghq.com/v1
 Credentials:
@@ -1572,7 +1563,7 @@ Metadata:
   Self Link:         /apis/configuration.konghq.com/v1/namespaces/default/kongconsumers/consumer1
   UID:               d8745b13-7dff-4d42-a1c9-dd7d1226df75
 Username:            consumer1
-Events:              <none>
+Events:              &ltnone&gt
 </pre>
 
 8. Consume the route with the API Key
