@@ -1145,7 +1145,7 @@ X-Kong-Response-Latency: 0
 This Sample Application will be use to show Kong for Kubernetes Ingress Controller capabilities:
 
 <pre>
-cat <<EOF | kubectl apply -f -
+cat &lt&ltEOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
 metadata:
@@ -1219,7 +1219,7 @@ kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0    
 In order to expose "sample" through K4K8S, we're going to create a specific "/sampleroute" route. Initially, the route is totally open and can be consumed freely. The next sections enable, as their names suggest, an API Key and a Rate Limiting mechanism to protect the route.
 
 <pre>
-cat <<EOF | kubectl apply -f -
+cat &lt&ltEOF | kubectl apply -f -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -1243,13 +1243,13 @@ EOF
 <pre>
 $ kubectl get ingress --all-namespaces
 NAMESPACE   NAME          CLASS    HOSTS   ADDRESS         PORTS   AGE
-default     sampleroute   <none>   *       172.31.13.110   80      7s
+default     sampleroute   &ltnone>   *       172.31.13.110   80      7s
 
 $ kubectl describe ingress sampleroute
 Name:             sampleroute
 Namespace:        default
 Address:          172.31.13.110
-Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
+Default backend:  default-http-backend:80 (&lterror: endpoints "default-http-backend" not found>)
 Rules:
   Host        Path  Backends
   ----        ----  --------
@@ -1257,7 +1257,7 @@ Rules:
               /sampleroute   sample:5000 (192.168.143.137:5000)
 Annotations:  konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
-Events:       <none>
+Events:       &ltnone>
 </pre>
 
 
