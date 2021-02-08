@@ -860,8 +860,9 @@ Redirect you browser to http://<MKE's public IP>:8002
 ![Manager](artifacts/Manager.png "Manager")
 
 
-Delete Kong Enterprise deployment
+4. Delete Kong Enterprise deployment
 If you want to delete the Stack click on the right menu:
+![Delete](artifacts/Delete.png "Delete")
 
 
 
