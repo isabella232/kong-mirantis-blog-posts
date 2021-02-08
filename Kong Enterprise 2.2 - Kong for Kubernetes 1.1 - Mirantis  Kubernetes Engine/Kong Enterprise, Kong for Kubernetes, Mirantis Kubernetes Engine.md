@@ -10,21 +10,21 @@
 - [License](#license)
 
 ### Overview
-From Kong API Gateway perspective, using Consul as its Service Discovery infrastructure is one of the most well-known and common integration use cases. This exercise shows how to integrate Kong for Kubernetes (K4K8S), the Kong Ingress Controller based on the Kong API Gateway, with Consul Service Discovery running on a Kubernetes EKS Cluster.
+This Tech Guide will walk you through an end-to-end Kong Enterprise and Kong for Kubernetes provisioning process. The guide explores Kong Enterprise running on Mirantis Container Runtime and Kong for Kubernetes (K4K8S) running on Mirantis Kubernetes Engine.
+
+Kong Enterprise provides several services to defines APIs and policies to protect any existing upstream and microservices including API Governance, Analytics, Developer Portal, etc.
 
 Kong for Kubernetes can implement all sort of policies to protect the Ingresses defined to expose Kubernetes services to external Consumers including Rate Limiting, API Keys, OAuth/OIDC grants, etc.
 
-### Architecture
-The following diagram describes the Kong for Kubernetes Ingress Controller and Consul Service Discovery implementing a Canary Release:
+Mirantis platform will be installed using two Ubuntu based EC2 VMs running on AWS:
+. one VM for Mirantis Container Runtime and Mirantis Kubernetes Engine
+. one VM for Mirantis Secure Registry
 
-![Integration Architecture](artifacts/architecture.png "Integration Architecture")
 
 ### System Requirements
 
-- A Kubernetes Cluster. This exercise was done on an AWS EKS Cluster. Both Consul Connect and Kong Enterprise support any Kubernetes distribution.
 - kubectl
 - Helm 3.x
-- Consul CLI
 - HTTPie and Curl.
 
 
@@ -35,8 +35,6 @@ The following diagram describes the Kong for Kubernetes Ingress Controller and C
 https://docs.mirantis.com/docker-enterprise/v3.1/
 
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mcr.html
-
-The product formerly known as Docker Engine - Enterprise is now Mirantis Container Runtime (MCR).
 
 Go to EC2 dashboard and click on "Launch Instance". Select "Ubuntu Server 18.04 LTS (HVM), and "t2.xlarge" Instance Type and 50GB of storage.
 
@@ -164,9 +162,6 @@ After choosing the "Local - Manage the local Docker environment", we'll see its 
 
 ### Mirantis Kubernetes Engine Installation
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mke.html
-
-
-UCP is now MKE: The product formerly known as Docker Enterprise is now Mirantis Kubernetes Engine (MKE).
 
 1. MKE installation
 <pre>
