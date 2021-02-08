@@ -1121,6 +1121,7 @@ kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TC
 </pre>
 
 ![K4K8S](artifacts/K4K8S.png "K4K8S")
+![K4K8S2](artifacts/K4K8S2.png "K4K8S2")
 
 
 7. Check the Kong Proxy
