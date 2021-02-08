@@ -850,11 +850,10 @@ Click on "Create". Wait for deployment and click on "Done"
 3. Check Kong Enterprise deployment
 Open a terminal on MKE and run:
 
-<pre
+<pre>
 $ http :8001 | jq .version
 "2.2.1.0-enterprise-edition"
 </pre>
-
 
 Redirect you browser to http://<MKE's public IP>:8002
 ![Manager](artifacts/Manager.png "Manager")
@@ -867,10 +866,11 @@ If you want to delete the Stack click on the right menu:
 
 
 
-
-Kong Enterprise Service, Route and Plugins
-Create a Service
+### Kong Enterprise Service, Route and Plugins
+1. Create a Service
 Go to Kong Manager and click on "Workspace" default. Click on "Services"
+![Kong_Service](artifacts/Kong_Service.png "Kong_Service")
+
 
 
 Click on "New Service" and define a "httpbinservice" Service with the "http://httpbin.org" URL:
