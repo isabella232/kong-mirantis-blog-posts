@@ -1041,12 +1041,12 @@ unzip bundle.zip
 
 Run the utility script.
 <pre>
-eval "$(`<`env.sh)" 
+eval "$(`<`env.sh)"
 </pre>
 
 4. Testing the connection
 Test if you can connect to Kubernetes Cluster using:
-</pre>
+<pre>
 $ kubectl config get-contexts
 CURRENT   NAME                            CLUSTER                         AUTHINFO                        NAMESPACE
 *         ucp_34.220.139.185:6443_admin   ucp_34.220.139.185:6443_admin   ucp_34.220.139.185:6443_admin   
@@ -1066,7 +1066,8 @@ kube-system   ucp-nvidia-device-plugin-cwrpg             1/1     Running   0    
 kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0          118m
 </pre>
 
-Install Kong for Kubernetes
+5. Install Kong for Kubernetes
+<pre>
 $ helm repo add kong https://charts.konghq.com
 "kong" has been added to your repositories
 
@@ -1082,16 +1083,19 @@ kong     	https://charts.konghq.com
 
 $ kubectl create namespace kong
 namespace/kong created
+</pre>
 
 For the lab only, we're going to deploy Kong for Kubernetes using NodePort type. For production environments, we usually deploy it as LoadBalancer:
 
+<pre>
 $ helm install kong -n kong kong/kong \
     --set ingressController.installCRDs=false \
     --set proxy.type=NodePort \
     --set proxy.http.nodePort=32780
-
+</pre>
 
 Check the installation
+<pre>
 $ kubectl get pod --all-namespaces
 NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
 kong          kong-kong-75467bff7f-5z4ll                 2/2     Running   0          9m46s
@@ -1106,8 +1110,7 @@ kube-system   ucp-metrics-f2vz6                          3/3     Running   1    
 kube-system   ucp-nvidia-device-plugin-cwrpg             1/1     Running   0          5h25m
 kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0          3h55m
 
-
-$ ./kubectl get service --all-namespaces
+$ kubectl get service --all-namespaces
 NAMESPACE     NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 default       kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP                      5h28m
 kong          kong-kong-proxy   NodePort    10.96.154.9     <none>        80:32780/TCP,443:34536/TCP   10m
@@ -1115,13 +1118,12 @@ kube-system   compose-api       ClusterIP   10.96.51.39     <none>        443/TC
 kube-system   kube-dns          ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP       5h27m
 kube-system   ucp-controller    ClusterIP   10.96.219.147   <none>        443/TCP,12379/TCP            5h26m
 kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TCP                      5h26m
-
-
-
+</pre>
 
 
 
 Check the Kong Proxy
+<pre>
 $ http :32780
 HTTP/1.1 404 Not Found
 Connection: keep-alive
@@ -1134,12 +1136,13 @@ X-Kong-Response-Latency: 0
 {
     "message": "no Route matched with those values"
 }
-
+</pre>
 
 
 Sample App Installation
 This Sample Application will be use to show Kong for Kubernetes Ingress Controller capabilities:
 
+<pre>
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
@@ -1180,8 +1183,6 @@ spec:
 EOF
 
 
-
-
 $ kubectl get services --all-namespaces
 NAMESPACE     NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 default       kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP                      5h37m
@@ -1191,8 +1192,6 @@ kube-system   compose-api       ClusterIP   10.96.51.39     <none>        443/TC
 kube-system   kube-dns          ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP       5h36m
 kube-system   ucp-controller    ClusterIP   10.96.219.147   <none>        443/TCP,12379/TCP            5h36m
 kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TCP                      5h36m
-
-
 
 
 $ kubectl get pod --all-namespaces
@@ -1209,7 +1208,7 @@ kube-system   coredns-665c6f959f-sr56w                   1/1     Running   0    
 kube-system   ucp-metrics-f2vz6                          3/3     Running   1          5h36m
 kube-system   ucp-nvidia-device-plugin-cwrpg             1/1     Running   0          5h36m
 kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0          4h6m
-
+</pre>
 
 
 
