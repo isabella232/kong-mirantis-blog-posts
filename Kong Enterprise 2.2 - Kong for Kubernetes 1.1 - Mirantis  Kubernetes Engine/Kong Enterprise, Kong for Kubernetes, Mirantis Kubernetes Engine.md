@@ -589,6 +589,8 @@ For lab purposes, let's register MSR as an insecure register. Using Docker Deskt
 
 
 Click on "Docker Engine" and include the MSR's Public IP address as an insecure registry:
+![MacOS2](artifacts/MacOS2.png "MacOS")
+
 
 
 Click on  "Apply & Restart" button.
