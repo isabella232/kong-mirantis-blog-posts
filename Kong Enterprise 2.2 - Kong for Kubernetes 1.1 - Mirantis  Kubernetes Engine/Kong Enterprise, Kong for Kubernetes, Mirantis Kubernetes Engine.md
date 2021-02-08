@@ -571,10 +571,10 @@ sudo docker run -it --rm mirantis/dtr:lastest destroy --ucp-insecure-tls
 </pre>
 
 Go to MKE console
+![MKE_MSR3](artifacts/MKE_MSR3.png "MKE and MSR")
 
 
-
-Private Repository setting
+6. Private Repository setting
 Go to MSR using its EC2's Public IP. Accept the Digital Certificate presented by the Server. Since we've got SSO between MSR and MKE, we get redirected to Repositories page.
 
 
