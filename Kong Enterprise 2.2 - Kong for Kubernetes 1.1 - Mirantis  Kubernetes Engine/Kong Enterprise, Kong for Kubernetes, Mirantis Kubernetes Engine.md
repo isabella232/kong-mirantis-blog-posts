@@ -467,6 +467,7 @@ b9226n0jcd73dqm2a537ob0rb     ip-172-31-13-110    Ready               Active    
 
 ![MKE_MSR](artifacts/MKE_MSR.png "MKE and MSR")
 
+![MKE_MSR2](artifacts/MKE_MSR2.png "MKE and MSR")
 
 
 5. Mirantis Secure Registry installation
