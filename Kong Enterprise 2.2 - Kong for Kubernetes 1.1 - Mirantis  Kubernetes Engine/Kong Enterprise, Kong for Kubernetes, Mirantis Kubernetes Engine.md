@@ -14,7 +14,7 @@ This Tech Guide will walk you through an end-to-end Kong Enterprise and Kong for
 
 Kong Enterprise provides several services to defines APIs and policies to protect any existing upstream and microservices including API Governance, Analytics, Developer Portal, etc.
 
-Kong for Kubernetes can implement all sort of policies to protect the Ingresses defined to expose Kubernetes services to external Consumers including Rate Limiting, API Keys, OAuth/OIDC grants, etc.
+Kong for Kubernetes can implement all sorts of policies to protect the Ingresses defined to expose Kubernetes services to external Consumers including Rate Limiting, API Keys, OAuth/OIDC grants, etc.
 
 Mirantis platform will be installed using two Ubuntu based EC2 VMs running on AWS:
 . one VM for Mirantis Container Runtime and Mirantis Kubernetes Engine
@@ -54,6 +54,7 @@ sudo apt-get -y install \
     software-properties-common
 </pre>
 
+
 2. Install Mirantis Container Runtime
 <pre>
 export DOCKER_EE_URL="https://repos.mirantis.com"
@@ -77,6 +78,7 @@ sudo docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 </pre>
+
 
 3. Check the installation
 <pre>
@@ -290,8 +292,10 @@ sudo docker container run --rm -it \
 
 
 
-Mirantis Kubernetes Engine Web UI
+2. Mirantis Kubernetes Engine Web UI
 Redirect your browser to https://34.220.139.185. Use the admin/pwd you defined during installation to login.
+
+![MKE_WebUI](artifacts/MKE.png "Integration Architecture")
 
 
 Upload the trial license to go to the landing page:
@@ -300,8 +304,6 @@ Upload the trial license to go to the landing page:
 
 ### Mirantis Secure Registry (MSR)
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/msr.html
-
-The product formerly known as Docker Trusted Registry (DTR) is now Mirantis Secure Registry (MSR).
 
 Create another EC2 instance to install MSR). Kong Enterprise images copied from Bintray repositories will be stored here.
 
@@ -432,7 +434,7 @@ ping 34.222.221.3
 ping 172.31.13.110
 
 
-Using Private IP, ping MKE from MSR
+Using Private and Public IPs, ping MKE from MSR
 
 ping 34.220.139.185
 ping 172.31.5.42
@@ -441,24 +443,27 @@ ping 172.31.5.42
 4. Add MSR to MKE
 On MKE run:
 
+<pre>
 $ sudo docker swarm join-token worker
 To add a worker to this swarm, run the following command:
 
     docker swarm join --token SWMTKN-1-5u33sgghgxa5znh9vef9k25kbh8wtk5f8di21bi5la71zxgq9l-dg3j5hhnc4jwmdgi7t5dy4261 172.31.5.42:2377
-
+</pre>
 
 Copy the command output, go to MSR and run it:
 
+<pre>
 $ sudo docker swarm join --token SWMTKN-1-24qwditl5ndg5378lwd0uk0q4db2im20rc5mi5yrhpo5el6sil-6sy2modce3csukwbmw7qyual7 172.31.3.139:2377
 This node joined a swarm as a worker.
-
+</pre>
 
 Go back to MKE and run:
+<pre>
 $ sudo docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 ugykdu36o2uysi8b6gpklkbwf *   ip-172-31-5-42      Ready               Active              Leader              19.03.14
 b9226n0jcd73dqm2a537ob0rb     ip-172-31-13-110    Ready               Active                                  19.03.14
-
+</pre>
 
 
 
