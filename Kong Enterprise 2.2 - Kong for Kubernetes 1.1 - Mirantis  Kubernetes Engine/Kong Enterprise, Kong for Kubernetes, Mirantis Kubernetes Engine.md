@@ -305,7 +305,7 @@ Upload the trial license to go to the landing page:
 ### Mirantis Secure Registry (MSR)
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/msr.html
 
-Create another EC2 instance to install MSR). Kong Enterprise images copied from Bintray repositories will be stored here.
+Create another EC2 instance to install MSR. Kong Enterprise images copied from Bintray repositories will be stored here.
 
 Go to EC2 dashboard and click on "Launch Instance". Select "Ubuntu Server 18.04 LTS (HVM), and "t2.xlarge" Instance Type and 50GB of storage.
 
@@ -350,7 +350,7 @@ sudo systemctl enable docker.service
 sudo systemctl start docker.service
 </pre>
 
-Check the installation with:
+3. Check the installation with:
 <pre>
 $ sudo docker info
 Client:
@@ -410,7 +410,7 @@ Server:
 WARNING: No swap limit support
 </pre>
 
-3. Portainer installation
+4. Portainer installation
 <pre>
 sudo docker volume create portainer_data
 
@@ -440,7 +440,7 @@ ping 34.220.139.185
 ping 172.31.5.42
 
 
-4. Add MSR to MKE
+5. Add MSR to MKE
 On MKE run:
 
 <pre>
@@ -465,6 +465,7 @@ ugykdu36o2uysi8b6gpklkbwf *   ip-172-31-5-42      Ready               Active    
 b9226n0jcd73dqm2a537ob0rb     ip-172-31-13-110    Ready               Active                                  19.03.14
 </pre>
 
+![MKE_MSR](artifacts/MKE_MSR.png "MKE and MSR")
 
 
 
