@@ -285,14 +285,12 @@ INFO[0114] All Installation Steps Completed
 
 If you want to uninstall it:
 
+<pre>
 sudo docker container run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --name ucp \
   mirantis/ucp:3.3.5 uninstall-ucp --interactive
-
-
-
-
+</pre>
 
 
 
@@ -304,7 +302,7 @@ Upload the trial license to go to the landing page:
 
 
 
-Mirantis Secure Registry (MSR)
+### Mirantis Secure Registry (MSR)
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/msr.html
 
 The product formerly known as Docker Trusted Registry (DTR) is now Mirantis Secure Registry (MSR).
@@ -313,10 +311,12 @@ Create another EC2 instance to install MSR). Kong Enterprise images copied from 
 
 Go to EC2 dashboard and click on "Launch Instance". Select "Ubuntu Server 18.04 LTS (HVM), and "t2.xlarge" Instance Type and 50GB of storage.
 
+<pre>
 ssh -i "claudio-acquaviva.pem" ubuntu@ec2-34-222-221-3.us-west-2.compute.amazonaws.com
+</pre>
 
-
-Install utilities
+1. Install utilities
+<pre>
 sudo apt-get -y update
 sudo apt -y install httpie jq
 
@@ -325,9 +325,11 @@ sudo apt-get -y install \
     ca-certificates \
     curl \
     software-properties-common
+</pre>
 
 
-Install Mirantis Container Runtime
+2. Install Mirantis Container Runtime
+<pre>
 export DOCKER_EE_URL="https://repos.mirantis.com"
 export DOCKER_EE_VERSION=19.03
 
@@ -348,9 +350,10 @@ sudo docker run hello-world
 
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
-sudo systemctl stop docker.service
+</pre>
 
 Check the installation with:
+<pre>
 $ sudo docker info
 Client:
  Debug Mode: false
@@ -407,14 +410,16 @@ Server:
  Product License: this node is not a swarm manager - check license status on a manager node
 
 WARNING: No swap limit support
+</pre>
 
-
-Portainer installation
+3. Portainer installation
+<pre>
 sudo docker volume create portainer_data
 
 sudo docker run --name portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
 sudo docker start portainer
+</pre>
 
 Using the EC2's public address, check the installation:
 http://34.222.221.3:9000
@@ -437,7 +442,7 @@ ping 34.220.139.185
 ping 172.31.5.42
 
 
-Add MSR to MKE
+4. Add MSR to MKE
 On MKE run:
 
 $ sudo docker swarm join-token worker
@@ -462,10 +467,7 @@ b9226n0jcd73dqm2a537ob0rb     ip-172-31-13-110    Ready               Active    
 
 
 
-
-
-
-Mirantis Secure Registry installation
+5. Mirantis Secure Registry installation
 Run the following command from MKE, not MSR. Use "admin" and "kubernetes" as the uid and password, as specified during MKE installation.
 
 dtr-external-url is the MSR's Public IP.
