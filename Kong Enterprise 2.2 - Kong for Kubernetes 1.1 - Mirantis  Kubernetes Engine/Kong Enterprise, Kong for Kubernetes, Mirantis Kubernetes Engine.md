@@ -1239,7 +1239,7 @@ spec:
 EOF
 </pre>
 
-Checking the Ingress
+2. Checking the Ingress
 <pre>
 $ kubectl get ingress --all-namespaces
 NAMESPACE   NAME          CLASS    HOSTS   ADDRESS         PORTS   AGE
@@ -1261,7 +1261,7 @@ Events:       <none>
 </pre>
 
 
-Testing the Ingress
+3. Testing the Ingress
 <pre>
 $ http :32780/sampleroute/hello
 HTTP/1.1 200 OK
@@ -1277,11 +1277,11 @@ X-Kong-Upstream-Latency: 2
 Hello World, Kong: 2021-01-18 22:39:52.113812
 </pre>
 
-K4K8S - Rate Limiting Policy Definition
+## K4K8S - Rate Limiting Policy Definition
 Since we have the Microservice exposed through a route defined in the Ingress Controller, let's protect it with a Rate Limiting Policy first.
 
-
-Create the plugin
+1. Create the plugin
+<pre>
 cat <<EOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
@@ -1293,13 +1293,13 @@ config:
   policy: local
 plugin: rate-limiting
 EOF
+</pre>
 
-
-Check the plugin
+2. Check the plugin
+<pre>
 $ kubectl get kongplugins
 NAME           PLUGIN-TYPE     AGE
 rl-by-minute   rate-limiting   21s
-
 
 $ kubectl describe kongplugin rl-by-minute
 Name:         rl-by-minute
@@ -1335,7 +1335,7 @@ Metadata:
   UID:               0e420b0e-177d-4e42-a66a-6373b2d110f4
 Plugin:              rate-limiting
 Events:              <none>
-
+</pre>
 
 
 Apply the plugin to the route
