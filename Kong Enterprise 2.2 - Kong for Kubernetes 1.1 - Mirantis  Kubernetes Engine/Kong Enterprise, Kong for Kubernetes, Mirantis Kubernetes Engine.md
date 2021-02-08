@@ -878,16 +878,15 @@ Go to Kong Manager and click on "Workspace" default. Click on "Services"
 Click on "Create":
 ![Kong_Service3](artifacts/Kong_Service3.png "Kong_Service3")
 
-
-Create a Route
+3. Create a Route
 Click on "Add Route"
-
+![Kong_Route](artifacts/Kong_Route.png "Kong_Route")
 
 Type "httpbinroute" for Name. Click on "Add Path" and type "/httpbin".
-
+![Kong_Route2](artifacts/Kong_Route2.png "Kong_Route2")
 
 Click on "Create"
-
+![Kong_Route3](artifacts/Kong_Route3.png "Kong_Route3")
 
 
 
