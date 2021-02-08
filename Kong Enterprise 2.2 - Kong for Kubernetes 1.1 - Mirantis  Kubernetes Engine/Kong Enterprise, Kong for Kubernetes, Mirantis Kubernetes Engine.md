@@ -1338,7 +1338,8 @@ Events:              <none>
 </pre>
 
 
-Apply the plugin to the route
+3. Apply the plugin to the route
+<pre>
 kubectl patch ingress sampleroute -p '{"metadata":{"annotations":{"konghq.com/plugins":"rl-by-minute"}}}'
 
 $ kubectl describe ingress sampleroute
@@ -1355,18 +1356,20 @@ Annotations:  konghq.com/plugins: rl-by-minute
               konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
 Events:       <none>
+</pre>
 
 
-
-Deleting the annotation
+4. Deleting the annotation
 In case you want to disapply the plugin to the ingress run:
+<pre>
 $ kubectl annotate ingress sampleroute konghq.com/plugins-
+</pre>
 
 
-
-Test the plugin
+5. Test the plugin
 Consume the route:
 
+<pre>
 $ http :32780/sampleroute/hello
 HTTP/1.1 200 OK
 Connection: keep-alive
@@ -1384,10 +1387,11 @@ X-RateLimit-Limit-Minute: 3
 X-RateLimit-Remaining-Minute: 2
 
 Hello World, Kong: 2021-01-18 22:41:24.693249
-
+</pre>
 
 As expected, we get an error for the 4th request::
 
+<pre>
 $ http :32780/sampleroute/hello
 HTTP/1.1 429 Too Many Requests
 Connection: keep-alive
@@ -1406,15 +1410,15 @@ X-RateLimit-Remaining-Minute: 0
 {
     "message": "API rate limit exceeded"
 }
+</pre>
 
 
 
-
-K4K8S - API Key Policy Definition
+## K4K8S - API Key Policy Definition
 Now, let's add an API Key Policy to this route:
 
-
-Create the plugin
+1. Create the plugin
+<pre>
 cat <<EOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
@@ -1423,9 +1427,10 @@ metadata:
   namespace: default
 plugin: key-auth
 EOF
+</pre>
 
-
-Check the plugin
+2. Check the plugin
+<pre>
 $ kubectl get kongplugins
 NAME           PLUGIN-TYPE     AGE
 apikey         key-auth        63s
@@ -1459,11 +1464,12 @@ Metadata:
   UID:               9c43d7fd-60cf-4b6d-9469-e6ef7200a800
 Plugin:              key-auth
 Events:              <none>
+</pre>
 
-
-Apply the plugin to the route
+3. Apply the plugin to the route
 Now, let's add an API Key Policy to this route keeping the original Rate Limiting plugin:
 
+<pre>
 kubectl patch ingress sampleroute -p '{"metadata":{"annotations":{"konghq.com/plugins":"apikey, rl-by-minute"}}}'
 
 $ kubectl describe ingress sampleroute
@@ -1480,12 +1486,13 @@ Annotations:  konghq.com/plugins: apikey, rl-by-minute
               konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
 Events:       <none>
+</pre>
 
 
-
-Test the plugin
+4. Test the plugin
 As expected, if we try to consume the route we get an error:
 
+<pre>
 $ http :32780/sampleroute/hello
 HTTP/1.1 401 Unauthorized
 Connection: keep-alive
@@ -1499,18 +1506,22 @@ X-Kong-Response-Latency: 1
 {
     "message": "No API key found in request"
 }
+</pre>
 
-
-Provisioning a Key
+5. Provisioning a Key
+<pre>
 $ kubectl create secret generic consumerapikey --from-literal=kongCredType=key-auth --from-literal=key=kong-secret
 secret/consumerapikey created
+</pre>
 
 If you want to delete it run:
 
+<pre>
 $ kubectl delete secret consumerapikey
+</pre>
 
-
-Creating a Consumer with the Key
+6. Creating a Consumer with the Key
+<pre>
 cat <<EOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongConsumer
@@ -1523,9 +1534,10 @@ username: consumer1
 credentials:
 - consumerapikey
 EOF
+</pre>
 
-
-Check the Consumer
+7. Check the Consumer
+<pre>
 $ kubectl get kongconsumer
 NAME        USERNAME    AGE
 consumer1   consumer1   2m37s
@@ -1561,9 +1573,10 @@ Metadata:
   UID:               d8745b13-7dff-4d42-a1c9-dd7d1226df75
 Username:            consumer1
 Events:              <none>
+</pre>
 
-
-Consume the route with the API Key
+8. Consume the route with the API Key
+<pre>
 $ http :32780/sampleroute/hello apikey:kong-secret
 HTTP/1.1 200 OK
 Connection: keep-alive
@@ -1581,13 +1594,13 @@ X-RateLimit-Limit-Minute: 3
 X-RateLimit-Remaining-Minute: 2
 
 Hello World, Kong: 2021-01-18 22:44:33.099767
+</pre>
 
 
-
-
-Getting the Rate Limiting error
+9. Getting the Rate Limiting error
 Again, if we try the 4th request in a single minute we get the rate limiting error
 
+<pre>
 $ http :32780/sampleroute/hello apikey:kong-secret
 HTTP/1.1 429 Too Many Requests
 Connection: keep-alive
@@ -1606,7 +1619,4 @@ X-RateLimit-Remaining-Minute: 0
 {
     "message": "API rate limit exceeded"
 }
-
-
-
-
+</pre>
