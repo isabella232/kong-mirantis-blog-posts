@@ -595,47 +595,49 @@ Click on  "Apply & Restart" button.
 
 
 
-2. Kong Enterprise and Mirantis Secure Registry
+2. Kong Enterprise and Mirantis Secure Registry<p>
 Click on "Repositories" .-> "New Repository". Create a "kong-enterprise-edition" and a "postgres" repository.
 ![KE_repos](artifacts/KongEnterpriseRepos.png "Kong Enterprise Repos")
 
 
-
-
-
-
-Push Kong Enterprise to MSR
+3. Push Kong Enterprise to MSR<p>
 From a local terminal, login to Kong Bintray
 
+<pre>
 docker login -u cacquaviva -p <API-KEY> kong-docker-kong-enterprise-edition-docker.bintray.io
+</pre>
 
 Pull Kong Enterprise and PostgreSQL image from public repositories
 
+<pre>
 docker pull kong-docker-kong-enterprise-edition-docker.bintray.io/kong-enterprise-edition:2.2.1.0-alpine
 
 docker pull postgres:latest
+</pre>
 
 Tag the images using MSR's Public IP
-
+<pre>
 docker tag kong-docker-kong-enterprise-edition-docker.bintray.io/kong-enterprise-edition:2.2.1.0-alpine 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine
 
 docker tag postgres:latest 34.222.221.3/admin/postgres:latest
-
+</pre>
 
 
 Login to MSR
 
+<pre>
 $ docker login 34.222.221.3
 Username: admin
 Password: 
 Login Succeeded
-
+</pre>
 
 Push Kong Enterprise Image
-
+<pre>
 docker image push 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine
 
 docker image push 34.222.221.3/admin/postgres:latest
+</pre>
 
 Check the Images:
 
