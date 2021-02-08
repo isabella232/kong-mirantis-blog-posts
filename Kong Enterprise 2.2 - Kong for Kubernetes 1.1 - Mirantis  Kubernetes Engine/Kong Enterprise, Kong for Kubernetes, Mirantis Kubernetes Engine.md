@@ -604,7 +604,7 @@ Click on "Repositories" .-> "New Repository". Create a "kong-enterprise-edition"
 From a local terminal, login to Kong Bintray
 
 <pre>
-docker login -u cacquaviva -p `<API-KEY>` kong-docker-kong-enterprise-edition-docker.bintray.io
+docker login -u cacquaviva -p <\API-KEY\> kong-docker-kong-enterprise-edition-docker.bintray.io
 </pre>
 
 Pull Kong Enterprise and PostgreSQL image from public repositories
