@@ -13,6 +13,7 @@ ssh -i "claudio-acquaviva.pem" ubuntu@ec2-34-220-139-185.us-west-2.compute.amazo
 </pre>
 
 Install utilities
+<pre>
 sudo apt-get -y update
 sudo apt -y install httpie jq 
 
@@ -21,9 +22,10 @@ sudo apt-get -y install \
     ca-certificates \
     curl \
     software-properties-common
-
+</pre>
 
 Install Mirantis Container Runtime
+<pre>
 export DOCKER_EE_URL="https://repos.mirantis.com"
 export DOCKER_EE_VERSION=19.03
 
@@ -45,8 +47,10 @@ sudo docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 sudo systemctl stop docker.service
+</pre>
 
 Check the installation with:
+<pre>
 $ sudo docker info
 Client:
  Debug Mode: false
@@ -103,7 +107,7 @@ Server:
  Product License: this node is not a swarm manager - check license status on a manager node
 
 WARNING: No swap limit support
-
+</pre>
 
 
 Portainer installation
