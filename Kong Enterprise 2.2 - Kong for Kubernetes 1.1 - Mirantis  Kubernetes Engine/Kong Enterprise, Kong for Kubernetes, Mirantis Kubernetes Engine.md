@@ -1120,6 +1120,7 @@ kube-system   ucp-controller    ClusterIP   10.96.219.147   <none>        443/TC
 kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TCP                      5h26m
 </pre>
 
+![K4K8S](artifacts/K4K8S.png "K4K8S")
 
 
 7. Check the Kong Proxy
@@ -1212,17 +1213,11 @@ kube-system   ucp-nvidia-device-plugin-mbl74             1/1     Running   0    
 
 
 
-
-
-
-
-
-
-
-Ingresses and Policies
-Create a Service and a Route using CRDs
+## Ingresses and Policies
+1. Create a Service and a Route using CRDs
 In order to expose "sample" through K4K8S, we're going to create a specific "/sampleroute" route. Initially, the route is totally open and can be consumed freely. The next sections enable, as their names suggest, an API Key and a Rate Limiting mechanism to protect the route.
 
+<pre>
 cat <<EOF | kubectl apply -f -
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1241,9 +1236,10 @@ spec:
             serviceName: sample
             servicePort: 5000
 EOF
-
+</pre>
 
 Checking the Ingress
+<pre>
 $ kubectl get ingress --all-namespaces
 NAMESPACE   NAME          CLASS    HOSTS   ADDRESS         PORTS   AGE
 default     sampleroute   <none>   *       172.31.13.110   80      7s
@@ -1261,10 +1257,11 @@ Rules:
 Annotations:  konghq.com/strip-path: true
               kubernetes.io/ingress.class: kong
 Events:       <none>
-
+</pre>
 
 
 Testing the Ingress
+<pre>
 $ http :32780/sampleroute/hello
 HTTP/1.1 200 OK
 Connection: keep-alive
@@ -1277,7 +1274,7 @@ X-Kong-Proxy-Latency: 0
 X-Kong-Upstream-Latency: 2
 
 Hello World, Kong: 2021-01-18 22:39:52.113812
-
+</pre>
 
 K4K8S - Rate Limiting Policy Definition
 Since we have the Microservice exposed through a route defined in the Ingress Controller, let's protect it with a Rate Limiting Policy first.
