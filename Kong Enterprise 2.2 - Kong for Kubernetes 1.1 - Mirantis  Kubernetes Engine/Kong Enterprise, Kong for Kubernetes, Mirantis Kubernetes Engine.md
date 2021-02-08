@@ -8,7 +8,9 @@ The product formerly known as Docker Engine - Enterprise is now Mirantis Contain
 
 Go to EC2 dashboard and click on "Launch Instance". Select "Ubuntu Server 18.04 LTS (HVM), and "t2.xlarge" Instance Type and 50GB of storage.
 
+<pre>
 ssh -i "claudio-acquaviva.pem" ubuntu@ec2-34-220-139-185.us-west-2.compute.amazonaws.com
+</pre>
 
 Install utilities
 sudo apt-get -y update
