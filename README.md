@@ -1,4 +1,1 @@
 # mirantis-blog-posts
-
-
-adsadaasd
