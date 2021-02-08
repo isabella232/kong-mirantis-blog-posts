@@ -111,14 +111,18 @@ WARNING: No swap limit support
 
 
 Portainer installation
+<pre>
 sudo docker volume create portainer_data
 
 sudo docker run --name portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
 sudo docker start portainer
+</pre>
 
 Using the EC2's public address, check the installation:
+<pre>
 http://34.220.139.185:9000
+</pre>
 
 At the first access, Portainer asks to define the admin's password. Choose "portainer".
 
