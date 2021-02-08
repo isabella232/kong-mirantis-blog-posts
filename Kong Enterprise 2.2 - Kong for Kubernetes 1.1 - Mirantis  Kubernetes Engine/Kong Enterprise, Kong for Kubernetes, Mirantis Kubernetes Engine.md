@@ -660,13 +660,12 @@ docker image rm 34.222.221.3/admin/postgres:latest
 Still on MacOS run:
 
 Check your local images
-
 <pre>
 $ docker image ls
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
 </pre>
 
-Login to MSR
+1. Login to MSR
 <pre>
 $ docker login 34.222.221.3
 Username: admin
@@ -674,17 +673,17 @@ Password:
 Login Succeeded
 </pre>
 
-Pull Kong Enterprise image from MSR
+2. Pull Kong Enterprise image from MSR
 <pre>
 docker pull 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine
 </pre>
 
-Tag the local image
+3. Tag the local image
 <pre>
 docker tag 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine kong-ee
 </pre>
 
-Create a PostgreSQL container
+4. Create a PostgreSQL container
 <pre>
 docker run -d --name kong-ee-database \
    -p 5432:5432 \
@@ -694,18 +693,18 @@ docker run -d --name kong-ee-database \
    34.222.221.3/admin/postgres:latest
 </pre>
 
-Define the KONG_LICENSE_DATA env variable
+4. Define the KONG_LICENSE_DATA env variable
 <pre>
 export KONG_LICENSE_DATA='{"license":{"signature":"xxxxxx","payload":{"customer":"Kong_SE_Demo","license_creation_date":"2019-11-03","product_subscription":"Kong Enterprise Edition","admin_seats":"5","support_plan":"None","license_expiration_date":"2020-12-12","license_key":"yyyyyy"},"version":1}}'
 </pre>
 
-Create a Docker network
+5. Create a Docker network
 <pre>
 docker network create kong-net
 </pre>
 
 
-Bootstrap the PostgreSQL database:
+6. Bootstrap the PostgreSQL database:
 <pre>
 docker run --rm --link kong-ee-database:kong-ee-database \
    -e "KONG_DATABASE=postgres" -e "KONG_PG_HOST=kong-ee-database" \
@@ -715,7 +714,7 @@ docker run --rm --link kong-ee-database:kong-ee-database \
    kong-ee kong migrations bootstrap
 </pre>
 
-Start the Kong Enterprise container:
+7. Start the Kong Enterprise container:
 <pre>
 docker run -d --name kong-ee --link kong-ee-database:kong-ee-database \
   -e "KONG_DATABASE=postgres" \
@@ -746,7 +745,8 @@ docker run -d --name kong-ee --link kong-ee-database:kong-ee-database \
   kong-ee
 </pre>
 
-Test the installation
+8. Test the installation:
+<pre>
 http patch :8001/workspaces/default config:='{"portal": true}'
 
 docker network connect kong-net kong-ee
@@ -761,18 +761,18 @@ docker stop kong-ee-database
 docker start kong-ee-database
 docker start kong-ee
 
-$ http :8001 | jq .version
+http :8001 | jq .version
 "2.2.1.0-enterprise-edition"
+</pre>
 
 
 
 
-
-
-Kong Enterprise installation - Docker Compose
-Create Kong Enterprise Docker Compose file
+### Kong Enterprise installation - Docker Compose
+1. Create Kong Enterprise Docker Compose file
 Below is an example of a docker-compose.yml file. Notice the KONG_PORTAL_GUI_HOST configuration is pointing to the MKE's public address, 34.220.139.185
 
+<pre>
 version: "3.1"
 
 services:
@@ -834,12 +834,14 @@ services:
    - KONG_PORTAL_GUI_HOST=54.188.84.2:8003
    - KONG_PORTAL_SESSION_CONF={"storage":"kong","cookie_name":"portal_session","secret":"super-secret","cookie_secure":false}
    - KONG_LICENSE_DATA={"license":{"version":1,"signature":"xxxxx","payload":{"customer":"Kong_SE_Demo_H1FY22","license_creation_date":"2020-11-30","product_subscription":"Kong Enterprise Edition","support_plan":"None","admin_seats":"5","dataplanes":"5","license_expiration_date":"2021-06-30","license_key":"yyyyy"}}}
+</pre>
 
-
-Create Kong Enterprise Docker Compose Stack
+2. Create Kong Enterprise Docker Compose Stack
 From MKE, on the left menu bar click on "Shared Resources" -> "Stacks" and "Create Stack".
 For Name, type "kong". Click on "Next".
 Click on "Upload docker-compose.yml file" link and upload the docker-compose.yml described above.
+
+![Compose](artifacts/Compose.png "PostgreSQL_image")
 
 
 Click on "Create". Wait for deployment and click on "Done"
