@@ -570,16 +570,18 @@ sudo docker run -it --rm mirantis/dtr:lastest destroy --ucp-insecure-tls
 //sudo docker run -it --rm mirantis/dtr destroy --ucp-url https://54.188.84.2 --ucp-insecure-tls
 </pre>
 
-Go to MKE console
+Go to MKE console and check MSR
 ![MKE_MSR3](artifacts/MKE_MSR3.png "MKE and MSR")
 
 
-6. Private Repository setting
+6. Private Repository setting<p>
 Go to MSR using its EC2's Public IP. Accept the Digital Certificate presented by the Server. Since we've got SSO between MSR and MKE, we get redirected to Repositories page.
 
+![MSR](artifacts/MSR.png "MSR")
 
 
-Kong Enterprise Docker Images
+### Kong Enterprise Docker Images
+
 Register MSR as an insecure-registry
 For lab purposes, let's register MSR as an insecure register. Using Docker Desktop 3.1.0 on a MacOS, click on Docker->Preferences
 
