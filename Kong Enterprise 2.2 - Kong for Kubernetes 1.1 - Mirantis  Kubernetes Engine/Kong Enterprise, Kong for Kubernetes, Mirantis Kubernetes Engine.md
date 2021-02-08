@@ -1041,7 +1041,7 @@ unzip bundle.zip
 
 Run the utility script.
 <pre>
-eval "$(`<`env.sh)"
+eval "$(<env.sh)"
 </pre>
 
 4. Testing the connection
@@ -1094,7 +1094,7 @@ $ helm install kong -n kong kong/kong \
     --set proxy.http.nodePort=32780
 </pre>
 
-Check the installation
+6. Check the installation
 <pre>
 $ kubectl get pod --all-namespaces
 NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
@@ -1122,7 +1122,7 @@ kube-system   ucp-metrics       ClusterIP   10.96.206.212   <none>        443/TC
 
 
 
-Check the Kong Proxy
+7. Check the Kong Proxy
 <pre>
 $ http :32780
 HTTP/1.1 404 Not Found
@@ -1139,7 +1139,7 @@ X-Kong-Response-Latency: 0
 </pre>
 
 
-Sample App Installation
+8. Sample App Installation
 This Sample Application will be use to show Kong for Kubernetes Ingress Controller capabilities:
 
 <pre>
