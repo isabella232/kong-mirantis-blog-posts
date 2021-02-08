@@ -641,70 +641,82 @@ docker image push 34.222.221.3/admin/postgres:latest
 
 Check the Images:
 
-
-
+![KE_image](artifacts/KE_image.png "KE_image")
+![PostgreSQL_image](artifacts/PostgreSQL_image.png "PostgreSQL_image")
 
 
 Delete the local images:
 
+<pre>
 docker image rm kong-docker-kong-enterprise-edition-docker.bintray.io/kong-enterprise-edition:2.2.1.0-alpine
 docker image rm 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine
 
 docker image rm postgres:latest
 docker image rm 34.222.221.3/admin/postgres:latest
+</pre>
 
 
-Kong Enterprise installation - CLI
+### Kong Enterprise installation - CLI
 Still on MacOS run:
 
 Check your local images
 
+<pre>
 $ docker image ls
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
-
+</pre>
 
 Login to MSR
+<pre>
 $ docker login 34.222.221.3
 Username: admin
 Password: 
 Login Succeeded
-
+</pre>
 
 Pull Kong Enterprise image from MSR
+<pre>
 docker pull 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine
-
+</pre>
 
 Tag the local image
+<pre>
 docker tag 34.222.221.3/admin/kong-enterprise-edition:2.2.1.0-alpine kong-ee
-
+</pre>
 
 Create a PostgreSQL container
+<pre>
 docker run -d --name kong-ee-database \
    -p 5432:5432 \
    -e "POSTGRES_USER=kong" \
    -e "POSTGRES_DB=kong" \
    -e "POSTGRES_HOST_AUTH_METHOD=trust" \
    34.222.221.3/admin/postgres:latest
-
+</pre>
 
 Define the KONG_LICENSE_DATA env variable
+<pre>
 export KONG_LICENSE_DATA='{"license":{"signature":"xxxxxx","payload":{"customer":"Kong_SE_Demo","license_creation_date":"2019-11-03","product_subscription":"Kong Enterprise Edition","admin_seats":"5","support_plan":"None","license_expiration_date":"2020-12-12","license_key":"yyyyyy"},"version":1}}'
-
+</pre>
 
 Create a Docker network
+<pre>
 docker network create kong-net
+</pre>
 
 
 Bootstrap the PostgreSQL database:
+<pre>
 docker run --rm --link kong-ee-database:kong-ee-database \
    -e "KONG_DATABASE=postgres" -e "KONG_PG_HOST=kong-ee-database" \
    -e "KONG_LICENSE_DATA=$KONG_LICENSE_DATA" \
    -e "KONG_PASSWORD=kong" \
    -e "POSTGRES_PASSWORD=kong" \
    kong-ee kong migrations bootstrap
-
+</pre>
 
 Start the Kong Enterprise container:
+<pre>
 docker run -d --name kong-ee --link kong-ee-database:kong-ee-database \
   -e "KONG_DATABASE=postgres" \
   -e "KONG_PG_HOST=kong-ee-database" \
@@ -732,7 +744,7 @@ docker run -d --name kong-ee --link kong-ee-database:kong-ee-database \
   -p 8004:8004 \
   -p 8447:8447 \
   kong-ee
-
+</pre>
 
 Test the installation
 http patch :8001/workspaces/default config:='{"portal": true}'
