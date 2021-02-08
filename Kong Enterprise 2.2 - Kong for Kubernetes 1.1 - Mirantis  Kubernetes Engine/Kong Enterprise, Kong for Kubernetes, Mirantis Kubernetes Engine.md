@@ -1282,7 +1282,7 @@ Since we have the Microservice exposed through a route defined in the Ingress Co
 
 1. Create the plugin
 <pre>
-cat <<EOF | kubectl apply -f -
+cat &lt&ltEOF | kubectl apply -f -
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
