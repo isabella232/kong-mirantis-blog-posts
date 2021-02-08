@@ -28,11 +28,9 @@ The following diagram describes the Kong for Kubernetes Ingress Controller and C
 - HTTPie and Curl.
 
 
-### Installation
-
 #### Step 1: Mirantis Container Runtime installation
 
-1. Mirantis Container Runtime (MCR) Installation
+1. Prepare the environment
 https://docs.mirantis.com/docker-enterprise/v3.1/
 
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mcr.html
@@ -57,7 +55,7 @@ sudo apt-get -y install \
     software-properties-common
 </pre>
 
-Install Mirantis Container Runtime
+2. Install Mirantis Container Runtime
 <pre>
 export DOCKER_EE_URL="https://repos.mirantis.com"
 export DOCKER_EE_VERSION=19.03
@@ -81,7 +79,7 @@ sudo systemctl enable docker.service
 sudo systemctl start docker.service
 </pre>
 
-Check the installation with:
+3. Check the installation
 <pre>
 $ sudo docker info
 Client:
@@ -142,7 +140,7 @@ WARNING: No swap limit support
 </pre>
 
 
-Portainer installation
+4. Portainer installation
 <pre>
 sudo docker volume create portainer_data
 
@@ -161,14 +159,16 @@ At the first access, Portainer asks to define the admin's password. Choose "port
 After choosing the "Local - Manage the local Docker environment", we'll see its home page.
 
 
-Mirantis Kubernetes Engine (MKE) Installation
+
+
+#### Step 2: Mirantis Kubernetes Engine Installation
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mke.html
 
 
 UCP is now MKE: The product formerly known as Docker Enterprise is now Mirantis Kubernetes Engine (MKE).
 
-
-MKE installation
+1. MKE installation
+<pre>
 sudo docker image pull mirantis/ucp:3.3.5
 
 sudo docker container run --rm -it --name ucp \
@@ -176,13 +176,14 @@ sudo docker container run --rm -it --name ucp \
   mirantis/ucp:3.3.5 install \
   --host-address 172.31.5.42 \
   --interactive
-
+</pre>
 Obs.:
 172.31.5.42 is the EC2's Private IP
 Use "admin" and "kubernetes" as the uid and password
 Include EC2's Public IP (34.220.139.185) for "Additional aliases"
 
 Output:
+<pre>
 INFO[0000] Your Docker daemon version 19.03.14, build 57e3a05 (5.4.0-1029-aws) is compatible with UCP 3.3.5 (da5c8e9) 
 INFO[0000] Initializing New Docker Swarm                
 Admin Username: admin
@@ -279,7 +280,7 @@ INFO[0109] Step 37 of 39: [Set License]
 INFO[0109] Step 38 of 39: [Set Registry CA Certificates] 
 INFO[0109] Step 39 of 39: [Wait for All Nodes to be Ready] 
 INFO[0114] All Installation Steps Completed  
-
+</pre>
 
 
 If you want to uninstall it:
