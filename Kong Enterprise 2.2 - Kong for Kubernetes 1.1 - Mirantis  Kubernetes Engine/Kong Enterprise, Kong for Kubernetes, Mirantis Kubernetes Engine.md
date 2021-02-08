@@ -872,11 +872,11 @@ Go to Kong Manager and click on "Workspace" default. Click on "Services"
 ![Kong_Service](artifacts/Kong_Service.png "Kong_Service")
 
 
-
-Click on "New Service" and define a "httpbinservice" Service with the "http://httpbin.org" URL:
-
+2. Click on "New Service" and define a "httpbinservice" Service with the "http://httpbin.org" URL:
+![Kong_Service2](artifacts/Kong_Service2.png "Kong_Service2")
 
 Click on "Create":
+![Kong_Service3](artifacts/Kong_Service3.png "Kong_Service3")
 
 
 Create a Route
@@ -892,6 +892,7 @@ Click on "Create"
 
 
 Consume the Route
+<pre>
 $ http :8000/httpbin/get
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
@@ -920,7 +921,7 @@ X-Kong-Upstream-Latency: 147
     "origin": "10.0.0.2, 34.220.139.185",
     "url": "http://localhost/get"
 }
-
+</pre>
 
 
 Apply the Rate Limiting Plugin to the Route
