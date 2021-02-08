@@ -1041,7 +1041,7 @@ unzip bundle.zip
 
 Run the utility script.
 <pre>
-eval "$(<env.sh)"
+eval "$(`<`env.sh)" 
 </pre>
 
 4. Testing the connection
