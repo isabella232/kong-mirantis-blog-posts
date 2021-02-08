@@ -430,15 +430,17 @@ After choosing the "Local - Manage the local Docker environment", we'll see its 
 Connection testing
 Using Private and Public IPs, ping MSR from MKE
 
+<pre>
 ping 34.222.221.3
 ping 172.31.13.110
-
+</pre>
 
 Using Private and Public IPs, ping MKE from MSR
 
+<pre>
 ping 34.220.139.185
 ping 172.31.5.42
-
+</pre>
 
 5. Add MSR to MKE
 On MKE run:
