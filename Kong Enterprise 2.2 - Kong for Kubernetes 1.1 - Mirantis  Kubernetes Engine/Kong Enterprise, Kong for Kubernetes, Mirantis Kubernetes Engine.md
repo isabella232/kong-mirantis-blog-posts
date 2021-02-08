@@ -473,14 +473,16 @@ b9226n0jcd73dqm2a537ob0rb     ip-172-31-13-110    Ready               Active    
 
 
 5. Mirantis Secure Registry installation
+
 Run the following command from MKE, not MSR. Use "admin" and "kubernetes" as the uid and password, as specified during MKE installation.
 
-dtr-external-url is the MSR's Public IP.
-ucp-node is the MSR's worker node name.
-ucp-url is the MKE's Public IP.
-
+<pre>
 sudo docker run -it --rm docker/dtr:latest install --dtr-external-url https://34.222.221.3 --ucp-node ip-172-31-13-110 --ucp-url https://34.220.139.185 --ucp-insecure-tls
+</pre>
 
+dtr-external-url is the MSR's Public IP.<p>
+ucp-node is the MSR's worker node name.<p>
+ucp-url is the MKE's Public IP.<p>
 
 
 Output:
