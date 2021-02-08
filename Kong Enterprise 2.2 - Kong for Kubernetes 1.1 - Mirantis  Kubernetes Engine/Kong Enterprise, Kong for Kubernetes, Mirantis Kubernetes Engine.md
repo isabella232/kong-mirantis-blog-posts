@@ -28,7 +28,7 @@ The following diagram describes the Kong for Kubernetes Ingress Controller and C
 - HTTPie and Curl.
 
 
-#### Step 1: Mirantis Container Runtime installation
+### Mirantis Container Runtime installation
 
 1. Prepare the environment
 https://docs.mirantis.com/docker-enterprise/v3.1/
@@ -161,7 +161,7 @@ After choosing the "Local - Manage the local Docker environment", we'll see its 
 
 
 
-#### Step 2: Mirantis Kubernetes Engine Installation
+### Mirantis Kubernetes Engine Installation
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mke.html
 
 
