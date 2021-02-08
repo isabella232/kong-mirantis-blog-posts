@@ -888,9 +888,7 @@ Type "httpbinroute" for Name. Click on "Add Path" and type "/httpbin".
 Click on "Create"
 ![Kong_Route3](artifacts/Kong_Route3.png "Kong_Route3")
 
-
-
-Consume the Route
+4. Consume the Route
 <pre>
 $ http :8000/httpbin/get
 HTTP/1.1 200 OK
@@ -923,14 +921,17 @@ X-Kong-Upstream-Latency: 147
 </pre>
 
 
-Apply the Rate Limiting Plugin to the Route
+5. Apply the Rate Limiting Plugin to the Route
 Go back to the "httpbinroute" Route page and click on "Add a Plugin".
+![Kong_Plugin](artifacts/Plugin.png "Kong_Plugin")
 
 
 Click on "Rate Limiting" plugin. Set the "Config.Minute" parameter with 3.
+![Kong_Plugin2](artifacts/Plugin2.png "Kong_Plugin2")
 
 
 Click on "Create"
+![Kong_Plugin3](artifacts/Plugin3.png "Kong_Plugin3")
 
 
 Consume the Route again
