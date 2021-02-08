@@ -582,8 +582,10 @@ Go to MSR using its EC2's Public IP. Accept the Digital Certificate presented by
 
 ### Kong Enterprise Docker Images
 
-Register MSR as an insecure-registry
+1. Register MSR as an insecure-registry<p>
 For lab purposes, let's register MSR as an insecure register. Using Docker Desktop 3.1.0 on a MacOS, click on Docker->Preferences
+
+![MacOS](artifacts/MacOS.png "MacOS")
 
 
 Click on "Docker Engine" and include the MSR's Public IP address as an insecure registry:
