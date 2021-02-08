@@ -1,5 +1,38 @@
+## Kong Enterprise, Kong for Kubernetes and Mirantis Kubernetes Engine
 
-Mirantis Container Runtime (MCR) Installation
+### Table of Contents
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [Support](#support)
+- [License](#license)
+
+### Overview
+From Kong API Gateway perspective, using Consul as its Service Discovery infrastructure is one of the most well-known and common integration use cases. This exercise shows how to integrate Kong for Kubernetes (K4K8S), the Kong Ingress Controller based on the Kong API Gateway, with Consul Service Discovery running on a Kubernetes EKS Cluster.
+
+Kong for Kubernetes can implement all sort of policies to protect the Ingresses defined to expose Kubernetes services to external Consumers including Rate Limiting, API Keys, OAuth/OIDC grants, etc.
+
+### Architecture
+The following diagram describes the Kong for Kubernetes Ingress Controller and Consul Service Discovery implementing a Canary Release:
+
+![Integration Architecture](artifacts/architecture.png "Integration Architecture")
+
+### System Requirements
+
+- A Kubernetes Cluster. This exercise was done on an AWS EKS Cluster. Both Consul Connect and Kong Enterprise support any Kubernetes distribution.
+- kubectl
+- Helm 3.x
+- Consul CLI
+- HTTPie and Curl.
+
+
+### Installation
+
+#### Step 1: Mirantis Container Runtime installation
+
+1. Mirantis Container Runtime (MCR) Installation
 https://docs.mirantis.com/docker-enterprise/v3.1/
 
 https://docs.mirantis.com/docker-enterprise/v3.1/dockeree-products/mcr.html
@@ -46,7 +79,6 @@ sudo docker run hello-world
 
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
-sudo systemctl stop docker.service
 </pre>
 
 Check the installation with:
